@@ -2,14 +2,14 @@ package com.goorm.devsync.domain;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.goorm.devsync.domain.user.User;
+import com.goorm.devsync.dto.CreateInquiryRequest;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,9 +23,13 @@ public class Inquiries {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank
+	@Size(min = 1, max = 100, message = "제목은 1자에서 100자 사이")
 	@Column(nullable = false)
 	private String title;
 
+	@NotBlank
+	@Size(min = 1, max = 1000, message = "내용은 1자에서 1000자 사이")
 	@Column(nullable = false)
 	private String content;
 
@@ -38,5 +42,21 @@ public class Inquiries {
 
 	@Column(nullable = false)
 	private LocalDateTime updatedAt;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+
+
+
+	@Builder
+	public Inquiries(String title, String content, Status status, LocalDateTime createdAt, LocalDateTime updatedAt, User user) {
+		this.title = title;
+		this.content = content;
+		this.status = status;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.user = user;
+	}
 
 }

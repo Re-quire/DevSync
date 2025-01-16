@@ -14,6 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -43,5 +45,27 @@ public class Responses {
 
 	@Column(nullable = false)
 	private LocalDateTime updatedAt;
+
+	@Builder
+	public Responses(String content, Status status, Inquiries inquiry, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		this.content = content;
+		this.status = status;
+		this.inquiry = inquiry;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+
+	public void updateContent(String content) {
+		this.content = content;
+		this.updatedAt = LocalDateTime.now();
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
 }
