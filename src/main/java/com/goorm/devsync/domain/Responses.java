@@ -18,6 +18,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Getter
@@ -40,9 +42,11 @@ public class Responses {
 	@JoinColumn(name = "inquiry_id", nullable = false)
 	private Inquiries inquiry;
 
+	@CreationTimestamp
 	@Column(nullable = false, updatable = false)
 	private LocalDateTime createdAt;
 
+	@UpdateTimestamp
 	@Column(nullable = false)
 	private LocalDateTime updatedAt;
 
