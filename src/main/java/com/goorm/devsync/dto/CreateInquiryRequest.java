@@ -2,9 +2,11 @@ package com.goorm.devsync.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 public class CreateInquiryRequest {

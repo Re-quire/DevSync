@@ -25,7 +25,7 @@ public class InquiriesService {
     private final UserRepository userRepository;
 
     public InquiryResponse createInquiry(CreateInquiryRequest request) {
-        User user = getCurrentUser();
+//        User user = getCurrentUser();
 
         Inquiries inquiry = Inquiries.builder()
                 .title(request.getTitle())
@@ -33,7 +33,7 @@ public class InquiriesService {
                 .status(Status.PENDING)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .user(user)
+              //  .user(user)
                 .build();
 
         Inquiries savedInquiry = inquiriesRepository.save(inquiry);
@@ -70,10 +70,10 @@ public class InquiriesService {
         response.setCreatedAt(inquiry.getCreatedAt());
         response.setUpdatedAt(inquiry.getUpdatedAt());
 
-        UserResponse userResponse = new UserResponse();
-        userResponse.setId(inquiry.getUser().getId());
-        userResponse.setName(inquiry.getUser().getName());
-        response.setUser(userResponse);
+       // UserResponse userResponse = new UserResponse();
+        //userResponse.setId(inquiry.getUser().getId());
+       // userResponse.setName(inquiry.getUser().getName());
+       // response.setUser(userResponse);
 
         return response;
     }
